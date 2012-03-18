@@ -30,12 +30,10 @@ if ARGV.length == 1 and ARGV[0] == "config"
 end
 
 
-url = URI.parse(URL_TO_MONITOR)
-req = Net::HTTP::Get.new(url.path)
 @start_time = Time.new 
-res = Net::HTTP.start(url.host, url.port) { |http|
-	http.request(req)
-}
+uri = URI(URL_TO_MONITOR)
+# not going to write it to console
+Net::HTTP.get(uri)
 @end_time = Time.new
 
 @response_time = @end_time - @start_time
